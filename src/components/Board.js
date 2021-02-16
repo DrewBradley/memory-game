@@ -8,55 +8,35 @@ class Board extends Component {
   constructor() {
     super()
     this.state = {
-      deck: cardsData.sort(() => Math.random() - 0.5).map(card => <Card id={card.id} symbol={card.symbol} flipped={card.flipped} pickCard={this.pickCard}/>),
-      card1: null,
-      card2: null,
-      flipCount: 0,
+      deck: cardsData.sort(() => Math.random() - 0.5),
+      flipped: []
     }
   }
 
-  pickCard = (id, symbol) => {
-    !this.state.card1 ? this.setState({
-        card1: symbol,
-      }) : this.setState({
-        card2: symbol
-    })
-    this.setState(prevState => {
-      return{
-        ...prevState,
-        flipCount: prevState.flipCount++
-      }
-    })
-    this.findMatch(id)
+  pickCard = ({ id, symbol }) => {
+    this.setState({flipped: [...this.state.flipped, {'symbol': symbol, 'id': id}]})
   }
 
-  findMatch = (id) => {
-    return this.state.card1 === this.state.card2 ? this.matched(id) : this.resetCards()
+  componentDidUpdate() {
+    this.findMatch()
   }
 
-  matched = (id) => {
-    console.log(id)
+  findMatch = () => {
+    return this.state.flipped.length > 1 ? this.state.flipped.find(item => {
+      item.symbol
+    }) : console.log("LESS THAN ONE", this.state.flipped)
   }
 
-  resetCards = () => {
-    this.setState({
-      card1: null,
-      card2: null
-    })
-    const newArray = this.state.deck.map(card => {
-      return card;
-    })
-    console.log(newArray)
-    console.log("not a match!")
+  markMatched = (id) => {
   }
 
   render() {
-    console.log(this.state.flipCount, this.state.card1, this.state.card2)
+    const cards = this.state.deck.map(card => <Card key={card.id} id={card.id} symbol={card.symbol} pickCard={this.pickCard} />)
     return (
       <div className="game-container">
         <Header />
         <section className="game-board">
-          { this.state.deck }
+          { cards }
         </section>
       </div>
     )

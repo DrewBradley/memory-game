@@ -5,8 +5,10 @@ class Card extends Component{
   constructor(props) {
     super(props)
     this.state = {
+      id: props.id,
       symbol: props.symbol,
-      flipped: props.flipped,
+      flipped: false,
+      found: false,
     }
   }
   
@@ -17,7 +19,7 @@ class Card extends Component{
         flipped: !prevState.flipped
       }
     })
-    this.props.pickCard(this.state.id, this.state.symbol)
+    this.props.pickCard(this.state)
   }
 
   render() {
