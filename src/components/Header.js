@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header>
       <h1>Memory!</h1>
-      <button>New Game</button>
-      <p>{}</p>
+      <button onClick={props.shuffle}>New Game</button>
+      <p className="match-title">{props.count} Matches!!!</p>
     </header>
   )
 }

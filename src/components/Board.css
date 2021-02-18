@@ -2,6 +2,7 @@
   width: 90%;
   height: auto;
   background-color: cadetblue;
+  border: solid 1px black;
   margin: auto;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -12,4 +13,30 @@
 header {
   background-color: darkgray;
   margin: 0;
+}
+
+.match-title {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+button {
+  margin: 0;
+  height: 2rem;
+  color: bisque;
+  background-color: cadetblue;
+  border: solid 2px bisque;
+  transition: 200ms;
+}
+
+button:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  transition: 200ms;
+}
+
+@media screen and (max-width: 600px) {
+  .game-board {
+    width: 90%;
+  }
 }

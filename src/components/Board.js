@@ -8,13 +8,22 @@ class Board extends Component {
   constructor() {
     super()
     this.state = {
-      deck: cardsData.sort(() => Math.random() - 0.5),
-      flipped: []
+      cards: cardsData.sort(() => Math.random() - 0.5),
+      flipped: [],
+      match: []
     }
   }
 
+  shuffleDeck = () => {
+    this.setState({
+      deck: cardsData.sort(() => Math.random() - 0.5),
+      flipped: [],
+      match: []
+    })
+  }
+
   pickCard = ({ id, symbol }) => {
-    this.setState({flipped: [...this.state.flipped, {'symbol': symbol, 'id': id}]})
+    this.setState({flipped: [...this.state.flipped, {'symbol': symbol, 'id': id, 'flipped': true}]})
   }
 
   componentDidUpdate() {
@@ -22,21 +31,42 @@ class Board extends Component {
   }
 
   findMatch = () => {
-    return this.state.flipped.length > 1 ? this.state.flipped.find(item => {
-      item.symbol
-    }) : console.log("LESS THAN ONE", this.state.flipped)
+    const card1 = this.state.flipped[0]
+    const card2 = this.state.flipped[1]
+    if(this.state.flipped.length > 1) {
+      card1.symbol === card2.symbol ? this.itsAMatch(card1, card2) : this.resetCards()
+    }
   }
 
-  markMatched = (id) => {
+  itsAMatch = (card1, card2) => {
+    this.setState({
+      match: [...this.state.match, card1, card2],
+      flipped: []
+    })
+  }
+
+  resetCards = () => {
+    setTimeout(() => {
+      this.setState({
+      flipped: []
+      })
+    }, 1000)  
   }
 
   render() {
-    const cards = this.state.deck.map(card => <Card key={card.id} id={card.id} symbol={card.symbol} pickCard={this.pickCard} />)
-    return (
+    const cardsInPlay = this.state.cards.map(card => {
+      if(this.state.flipped.find(flipCard => flipCard.id === card.id)) {
+        return <Card key={card.id} id={card.id} symbol={card.symbol} flipped={true} pickCard={this.pickCard}/>
+      } else if (this.state.match.find(matchCard => matchCard.id === card.id)) {
+        return <Card key={card.id} id={card.id} symbol={card.symbol} flipped={true} pickCard={this.pickCard}/>
+      } else {
+        return <Card key={card.id} id={card.id} symbol={card.symbol} flipped={false} pickCard={this.pickCard} />}
+      })
+    return(
       <div className="game-container">
-        <Header />
+        <Header shuffle={this.shuffleDeck} count={this.state.match.length/2}/>
         <section className="game-board">
-          { cards }
+          { cardsInPlay }
         </section>
       </div>
     )

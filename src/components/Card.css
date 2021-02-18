@@ -10,10 +10,6 @@
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
-/* .card:hover {
-  transform: rotateY(180deg);
-} */
-
 .card-front,
 .card-back {
   -webkit-backface-visibility: hidden;
@@ -45,4 +41,21 @@
 
 .card-symbol {
   font-size: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    position: relative;
+    width: 75px;
+    height: 100px;
+  }
+
+  .card-symbol {
+    margin: auto;
+    font-size: 3rem;
+  }
+
+  .card-back {
+    margin: auto;
+  }
 }
