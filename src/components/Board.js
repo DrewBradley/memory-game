@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Board.css'
 import Card from './Card'
 import Header from './Header'
+import Winner from './Winner'
 import cardsData from '../data/card-data'
 
 class Board extends Component {
@@ -36,6 +37,15 @@ class Board extends Component {
     if(this.state.flipped.length > 1) {
       card1.symbol === card2.symbol ? this.itsAMatch(card1, card2) : this.resetCards()
     }
+    if(this.state.match.length > 15) {
+      this.showWin()
+    }
+  }
+
+  showWin = () => {
+    setTimeout(() => {
+      this.shuffleDeck()
+    }, 4000)
   }
 
   itsAMatch = (card1, card2) => {
@@ -65,6 +75,7 @@ class Board extends Component {
     return(
       <div className="game-container">
         <Header shuffle={this.shuffleDeck} count={this.state.match.length/2}/>
+        { this.state.match.length > 15 && <Winner /> }
         <section className="game-board">
           { cardsInPlay }
         </section>

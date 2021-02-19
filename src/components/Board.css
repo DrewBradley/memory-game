@@ -10,6 +10,29 @@
   perspective: 1000px;
 }
 
+.winner {
+  z-index: 2;
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  height: 60vh;
+  background-color: rgba(240, 248, 255, 0.9);
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  color: cadetblue;
+  font-size: 3rem;
+}
+
+.winner-title {
+  margin: 0;
+}
+
 header {
   background-color: darkgray;
   margin: 0;
