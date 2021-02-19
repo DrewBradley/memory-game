@@ -16,6 +16,7 @@ The three main components in this project are ```Header.js```, ```Board.js```, a
 
 ## Images
 ![Mobile View](https://media.giphy.com/media/C5stnpzU4tjUEmdbPk/giphy.gif)
+![Win Screen](https://media.giphy.com/media/IZNFzlTAixbsqPZ0Gp/giphy.gif)
 
 ## Thanks and Contributors
 
