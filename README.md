@@ -14,6 +14,9 @@ The three main components in this project are ```Header.js```, ```Board.js```, a
   - ```Board.js``` is the gameboard and contains most of the logic, and renders the grid that displays the cards.
   - ```Card.js``` contains the JSX and data that relates to the individual card.
 
+## Future Updates
+ - Fix "double click" bug: If a user clicks the same card twice, it is marked as a "match". Each card has a unique ID, so the cards IDs must be different, but the cards images, much match.
+
 ## Images
 ![Mobile View](https://media.giphy.com/media/C5stnpzU4tjUEmdbPk/giphy.gif)
 ![Win Screen](https://media.giphy.com/media/IZNFzlTAixbsqPZ0Gp/giphy.gif)
