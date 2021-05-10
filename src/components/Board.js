@@ -35,7 +35,7 @@ class Board extends Component {
     const card1 = this.state.flipped[0]
     const card2 = this.state.flipped[1]
     if(this.state.flipped.length > 1) {
-      card1.symbol === card2.symbol ? this.itsAMatch(card1, card2) : this.resetCards()
+      (card1.symbol === card2.symbol) && (card1.id !== card2.id) ? this.itsAMatch(card1, card2) : this.resetCards()
     }
     if(this.state.match.length > 15) {
       this.showWin()
