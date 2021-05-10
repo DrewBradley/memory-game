@@ -11,6 +11,7 @@ class Board extends Component {
     this.state = {
       cards: cardsData.sort(() => Math.random() - 0.5),
       flipped: [],
+      clicks: 0,
       match: []
     }
   }
@@ -19,12 +20,13 @@ class Board extends Component {
     this.setState({
       deck: cardsData.sort(() => Math.random() - 0.5),
       flipped: [],
+      clicks: 0,
       match: []
     })
   }
 
   pickCard = ({ id, symbol }) => {
-    this.setState({flipped: [...this.state.flipped, {'symbol': symbol, 'id': id, 'flipped': true}]})
+    this.setState({flipped: [...this.state.flipped, {'symbol': symbol, 'id': id, 'flipped': true}], clicks: this.state.clicks + 1})
   }
 
   componentDidUpdate() {
@@ -74,7 +76,7 @@ class Board extends Component {
       })
     return(
       <div className="game-container">
-        <Header shuffle={this.shuffleDeck} count={this.state.match.length/2}/>
+        <Header shuffle={this.shuffleDeck} count={this.state.match.length/2} clicks={this.state.clicks}/>
         { this.state.match.length > 15 && <Winner /> }
         <section className="game-board">
           { cardsInPlay }
